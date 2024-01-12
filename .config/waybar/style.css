@@ -1,0 +1,156 @@
+/* Theme */
+@import "catppuccin-mocha.css";
+
+/* Defaults */
+* {
+    border:        none;
+    border-radius: 10px;
+    font-family:   SF Mono;
+    margin:        0px;
+    min-height:    0;
+    padding:       0;
+}
+
+/* Base */
+#waybar {
+    background:    @base;
+    border:        2px solid @surface1;
+    border-radius: 15px;
+    font-size:     15px;
+}
+
+/* ================== */
+/* ==== .classes ==== */
+/* ================== */
+
+tooltip {
+    background: @base;
+    border: 2px solid @surface1;
+    border-radius: 10px;
+    margin: .1rem .5rem .1rem .5rem;
+}
+
+/* All modules on the left */
+.modules-left {
+    background: @surface0;
+    margin: 6px 6px 6px 6px;
+    padding: .1rem 0 .1rem 0;
+}
+
+.modules-center {
+    background: @surface0;
+    margin: 6px 6px 6px 6px;
+    padding: .1rem 0 .1rem 0;
+}
+
+/* All modules on the right */
+.modules-right {
+    background: @surface0;
+    margin: 6px 6px 6px 6px;
+    padding: .1rem 0 .1rem 0;
+}
+.power-menu {
+    color: @lavender;
+    padding: 0 .5rem 0 .5rem;
+}
+
+/* ================= */
+/* ==== Modules ==== */
+/* ================= */
+
+#battery,
+#clock,
+#network,
+#pulseaudio,
+#custom-power,
+#cpu,
+#memory,
+#custom-launcher {
+    margin-left:   .5rem;
+    margin-right:  .5rem;
+    padding-left:  .5rem;
+    padding-right: .5rem;
+}
+
+/* ==== Left ====*/
+#custom-launcher {
+    color: @lavender;
+}
+
+#workspaces {
+    font-size: 15px;
+    padding-right: .7em;
+    margin-bottom: -1px;
+}
+
+#workspaces button {
+    color: @text;
+}
+
+#workspaces button.active {
+    color: @green;
+}
+
+#workspaces button.urgent {
+    color: @red;
+}
+
+#window {
+    font-weight: bold;
+    margin: 4px 0 4px 1px;
+    padding-right: 1em;
+}
+
+#window.empty {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+/* ==== Center ==== */
+#cpu {
+    color: @blue;
+    margin-bottom: -1px;
+}
+
+#memory {
+    color: @flamingo;
+    margin-bottom: -1px;
+}
+
+/* ==== Right ==== */
+#network {
+    color: @pink;
+    margin-bottom: 1px;
+}
+
+#pulseaudio {
+    color: @rosewater;
+    font-size: 18px;
+    margin-bottom: -1px;
+}
+
+#battery {
+    color: @green;
+}
+
+#battery.warning {
+    color: @peach;
+}
+
+#battery.critical {
+    color: @red;
+}
+
+#clock {
+    color: @lavender;
+}
+
+#custom-power {
+    color: @red;
+    font-size: 20px;
+}
+
+#custom-quit, #custom-reboot {
+    font-size: 17px;
+    padding: 0 .5rem 0 .5rem;
+}

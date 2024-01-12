@@ -1,0 +1,156 @@
+{   
+// ==== Global defenitions ==== //
+// ============================ //
+    "layer":        "top",
+    "position":     "top",
+
+    "margin-top":   4, // px
+    "margin-left":  4,
+    "margin-right": 4,
+
+    "height": 42, // px, Overridden if too small
+
+    "modules-left": [
+        "custom/launcher",
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "cpu",
+        "memory"
+    ],
+    "modules-right": [
+        "network",
+        "pulseaudio",
+        "battery",
+        "clock",
+        "tray",
+        "group/group-power"
+    ],
+// ==== Modules defenitions ==== //
+// ============================= //
+
+    // Left modules:
+    "custom/launcher": {
+        "format":" ",
+        "on-click": "exec wofi -c ~/.config/wofi/config -I",
+        "tooltip": false
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active":  "",
+            "default": ""
+        },
+        "sort-by": "id",
+        "persistent-workspaces": {
+            "*": 5 // Shows five workspaces on every monitor
+        }
+    },
+    "hyprland/window": {
+        "format": "{class} {title}", 
+        "rewrite": { // Regex ECMAScript spec
+            "firefox (.*) — Mozilla Firefox": "󰈹 $1",
+            "kitty (.*)": " $1"
+        }
+    },
+
+    // Center modules:
+    "cpu": {
+        "interval": 10,
+        "format": " {usage}% ({avg_frequency} GHz)",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        },
+        "on-click": "kitty --detach 'htop'"
+    },
+
+    "memory": {
+        "interval": 15,
+        "format": " {used}/{total} GiB",
+        "on-click": "kitty --detach 'htop'", 
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    // Right modules:
+    "network": {
+        "interval": 15, // seconds
+        "format-wifi": "{icon} {essid}",
+        "format-ethernet": "  {ifname}: {ipaddr}/{cidr}",
+        "format-disconnected": "󰤮",
+        "tooltip-format": "{ifname}: {ipaddr}",
+        "on-click": "kitty --detach 'nmtui'",
+        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"]
+    },
+    "network#vpn": {
+        "interface": "tun0",
+        "format": "  {essid} ({signalStrength}%)",
+        "format-disconnected": "⚠ Disconnected",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon}",
+        "format-muted": "󰖁  {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "󰍭",
+        "format-bluetooth": "{volume}% {icon}  {format_source}",
+        "format-bluetooth-muted": "󰝟 {icon}  {format_source}",
+        "format-icons": {
+            "headphone":  "󰋋",
+            "headset":    "󰋎",
+            "default":   [""]
+        },
+        "on-click": "pavucontrol",
+        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%"
+    },
+    "battery": {
+        "states": { // %
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% 󱐋",
+        "format-plugged": "{capacity}% ",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "clock": {
+        "interval": 10, // seconds
+        "format-alt": " {:%e %b %Y}",
+        "format": "{:%H:%M}",
+        "tooltip-format": "{:%e %B %Y}"
+    },
+    "group/group-power": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500, // ms
+            "transition-left-to-right": false,
+            "children-class": "power-menu"
+        },
+        "modules": [
+            "custom/power",
+            "custom/quit",
+            "custom/reboot"
+        ]
+    },
+        "custom/power": {
+            "format":"󰐥",
+            "on-click": "shutdown now",
+            "tooltip": false
+        },
+        "custom/quit": {
+            "format": "󰗼",
+            "on-click": "hyprctl dispatch exit",
+            "tooltip": false
+        },
+        "custom/reboot": {
+            "format": "󰦛",
+            "on-click": "reboot",
+            "tooltip": false
+        }
+}
